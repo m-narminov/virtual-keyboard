@@ -171,9 +171,32 @@ window.onload = function () {
   meta.setAttribute('charset', 'UTF-8')
   this.console.log(meta)
 
-  this.document.append(
+  this.document.head.append(
     (this.document.createElement('title').innerHTML = 'Virtual keyboard')
   )
+
+  const styles = document.createElement('style')
+  styles.innerHTML = `
+    .keyboard {
+      display: grid;
+      
+    }
+
+    .row {
+       
+    }
+
+    .press {
+      background: red; 
+    }
+  `
+
+  this.document.head.append(styles)
+    
+
+
+
+
   let eng = false
   const keyboardPress = e => {
     textArea.value += e.code
@@ -195,17 +218,21 @@ window.onload = function () {
   textArea.style.height = '300px'
 
   const keyboard = this.document.createElement('div')
+  keyboard.classList.add('keyboard')
+  
 
   const lang = eng ? 'en' : 'ru'
   this.console.log(lang)
 
   for (let i = 0; i < rows[lang].length; i++) {
     const row = this.document.createElement('div')
+    row.style.display = 'grid'
+    row.style.gridTemplateColumns = `repeat(${rows[lang][i].length}, 1fr)`
     for (let j = 0; j < rows[lang][i].length; j++) {
       const key = this.document.createElement('button')
       key.name = rows[lang][i][j].id
       key.innerHTML = rows[lang][i][j].value
-      key.addEventListener('click', e => {})
+      key.addEventListener('click', e => {if (e.target.id === rows[lang][i][j].id) return e.classList.toggle('press') })
       row.append(key)
     }
     keyboard.append(row)
