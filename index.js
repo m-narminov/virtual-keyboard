@@ -192,10 +192,6 @@ window.onload = function () {
   `
 
   this.document.head.append(styles)
-    
-
-
-
 
   let eng = false
   const keyboardPress = e => {
@@ -219,7 +215,6 @@ window.onload = function () {
 
   const keyboard = this.document.createElement('div')
   keyboard.classList.add('keyboard')
-  
 
   const lang = eng ? 'en' : 'ru'
   this.console.log(lang)
@@ -232,7 +227,10 @@ window.onload = function () {
       const key = this.document.createElement('button')
       key.name = rows[lang][i][j].id
       key.innerHTML = rows[lang][i][j].value
-      key.addEventListener('click', e => {if (e.target.id === rows[lang][i][j].id) return e.classList.toggle('press') })
+      key.addEventListener('click', e => {
+        if (e.target.id === rows[lang][i][j].id)
+          return e.classList.toggle('press')
+      })
       row.append(key)
     }
     keyboard.append(row)
